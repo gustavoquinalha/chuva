@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CHUVA</title>
+    <link rel="stylesheet" href="css/css.css">
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+
+  </head>
+  <body>
+    <div class="menu">
+
+    </div>
+
+    <div class="conteudo flex">
+      <div class="player">
+        <audio src="https://youtu.be/aDfZ6STAfqA" id ="chuvinha" preload="auto" autoplay loop>
+          <p>Seu navegador não suporta o elemento audio.</p>
+        </audio>
+        <div>
+          <!--<button type="button" onclick="aud_play_pause()">Play/Pause</button>
+          <button onclick="document.getElementById('chuvinha').play()">PLAY</button>
+          <button onclick="document.getElementById('chuvinha').pause()">PAUSE</button>-->
+          <button class="play" id="chuvinha">Pause</button>
+          <!--<button onclick="document.getElementById('chuvinha').volume-=0.1">-</button>
+          <button onclick="document.getElementById('chuvinha').volume+=0.1">+</button>-->
+          <button onclick="mute(this);">Mute</button>
+
+        </div>
+
+      </div>
+    </div>
+
+    <footer>
+
+    </footer>
+    <script type="text/javascript">
+    var video = document.getElementById("chuvinha");
+
+    function mute(btn) {
+      var muted = video.muted;
+      btn.innerHTML = muted ? 'Mute' : 'un Mute';
+      video.muted = !muted;
+    }
+
+
+    $('.play').click(function(){
+      var $this = $(this);
+
+      // starting audio
+      var audioID = "chuvinha";
+
+      $this.toggleClass('active');
+      if($this.hasClass('active')){
+          $this.text('Play');
+          $("#" + audioID).trigger('pause');
+      } else {
+          $this.text('Pause');
+          $("#" + audioID).trigger('play');
+      }
+  });
+  </script>
+
+  </body>
+</html>
