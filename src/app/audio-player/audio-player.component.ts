@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, signal, Input, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, ViewChild, ElementRef, signal, ChangeDetectorRef, HostListener } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroPlaySolid, heroPauseSolid, heroStopSolid, heroSpeakerXMarkSolid, heroSpeakerWaveSolid, heroArrowPathRoundedSquareSolid } from '@ng-icons/heroicons/solid';
 import { NgClass, NgIf } from '@angular/common';
@@ -21,14 +21,29 @@ export class AudioPlayerComponent {
   isPlaying = signal(false);
   isLoop = signal(true);
   mp3Url: string = 'https://lazy-days.netlify.app/assets/chuva.mp3';
-
+  showElement = signal(true);
+  private timeoutId: any;
   private canvas!: HTMLCanvasElement;
   private ctx!: CanvasRenderingContext2D;
   private rainDrops: RainDrop[] = [];
   private numDrops: number = 500;
   private animationFrameId: any;
 
-  constructor(private elementRef: ElementRef, private ref: ChangeDetectorRef) { }
+  constructor(private elementRef: ElementRef) { }
+
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(event: MouseEvent): void {
+    this.showElement.set(true);
+    clearTimeout(this.timeoutId);
+    this.timeoutId = setTimeout(() => {
+      this.showElement.set(false);
+    }, 3000);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.resizeCanvas();
+  }
 
   ngOnInit(): void {
     this.canvas = this.elementRef.nativeElement.querySelector('#rainCanvas');
@@ -116,11 +131,6 @@ export class AudioPlayerComponent {
     this.isPlaying.set(isPlaying);
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    this.resizeCanvas();
-  }
-
   private resizeCanvas(): void {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
@@ -145,18 +155,6 @@ export class AudioPlayerComponent {
     if (this.isPlaying()) {
       this.animationFrameId = requestAnimationFrame(() => this.animate());
     }
-  }
-
-  public togglePlayPause(): void {
-    console.log('togglePlayPause');
-
-    this.isPlaying.set(!this.isPlaying());
-    if (this.isPlaying()) {
-      this.animate();
-    } else {
-      cancelAnimationFrame(this.animationFrameId);
-    }
-    this.ref.detectChanges();
   }
 }
 

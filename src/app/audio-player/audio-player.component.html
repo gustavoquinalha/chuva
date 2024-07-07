@@ -1,47 +1,56 @@
-<div class="audio-player w-screen h-screen flex flex-col justify-end items-end gap-2 md:gap-4 p-2 md:p-4 lg:p-8">
+<div class="audio-player">
   <audio loop #audio>
     <source [src]="mp3Url" type="audio/mp3" />
     Seu navegador não suporta o elemento de áudio.
   </audio>
 
-<div class="flex items-center gap-1 md:gap-2 w-full">
-  <div class="flex items-center gap-0 px-2 h-10 bg-zinc-950/80 rounded-full border border-zinc-800/80 w-full">
-    <div class="controls flex flex-wrap justify-center items-center">
-      <button (click)="play()" *ngIf="!isPlaying()" class="w-8 min-w-8 h-8 text-zinc-500 hover:text-zinc-200 rounded-full flex items-center justify-center text-center">
-        <ng-icon name="heroPlaySolid" size="20"></ng-icon>
-      </button>
-      <button (click)="pause()" *ngIf="isPlaying()" class="w-8 min-w-8 h-8 text-zinc-500 hover:text-zinc-200 rounded-full flex items-center justify-center text-center">
-        <ng-icon name="heroPauseSolid" size="20"></ng-icon>
-      </button>
-      <!-- <button (click)="stop()" class="w-8 min-w-8 h-8 text-zinc-500 hover:text-zinc-200 rounded-full flex items-center justify-center text-center">
-        <ng-icon name="heroStopSolid" size="20"></ng-icon>
-      </button> -->
-    </div>
-
-    <div class="progress-control flex items-center gap-2 text-xs w-full">
-      <div class="text-xs text-zinc-500 w-10 text-center flex justify-center items-center">
-        {{ formatTime(currentTime) }}
-      </div>
-      <input type="range" [value]="currentTime" [max]="duration" (input)="seek($event)" />
-      <div class="text-xs text-zinc-500 w-10 text-center flex justify-center items-center">
-        {{ formatTime(duration) }}
-      </div>
-    </div>
-
-    <button (click)="repeat()" [class.isLoop]="isLoop()" class="w-8 min-w-8 h-8 text-zinc-500 hover:text-zinc-200 rounded-full flex items-center justify-center text-center">
-      <div class="flex items-center justify-center text-center">
-        <ng-icon name="heroArrowPathRoundedSquareSolid" size="20"></ng-icon>
-      </div>
+  <div *ngIf="showElement()" class="fixed left-0 top-0 w-screen h-screen flex justify-center items-center" >
+    <button (click)="play()" *ngIf="!isPlaying()" class="w-12 min-w-12 h-12 bg-zinc-400/90 text-zinc-950/90 hover:bg-zinc-200/90 rounded-lg flex items-center justify-center text-center">
+      <ng-icon name="heroPlaySolid" size="22"></ng-icon>
+    </button>
+    <button (click)="pause()" *ngIf="isPlaying()" class="w-12 min-w-12 h-12 bg-zinc-400/90 text-zinc-950/90 hover:bg-zinc-200/90 rounded-lg flex items-center justify-center text-center">
+      <ng-icon name="heroPauseSolid" size="24"></ng-icon>
     </button>
   </div>
 
-    <div class="volume-control items-center flex gap-2 md:gap-4 px-2 h-10 bg-zinc-950/80 rounded-full border border-zinc-800/80">
-      <button (click)="mute()" [ngClass]="{'!text-zinc-200': volume === 0}" class="w-8 min-w-8 h-8 text-zinc-500 hover:text-zinc-200 rounded-full flex items-center justify-center text-center">
-        <ng-icon name="heroSpeakerXMarkSolid" size="20"></ng-icon>
+  <div *ngIf="showElement()" class="flex items-center justify-center gap-2 w-full mx-auto fixed left-0 bottom-0 p-4 md:p-8 z-90">
+    <div class="flex items-center gap-2 px-2 h-14 bg-zinc-950/90 rounded-xl border border-zinc-800/80 w-full">
+      <div class="controls flex flex-wrap justify-center items-center">
+        <button (click)="play()" *ngIf="!isPlaying()" class="w-10 min-w-10 h-10 bg-zinc-400 text-zinc-950 hover:bg-zinc-200 rounded-lg flex items-center justify-center text-center">
+          <ng-icon name="heroPlaySolid" size="22"></ng-icon>
+        </button>
+        <button (click)="pause()" *ngIf="isPlaying()" class="w-10 min-w-10 h-10 text-zinc-500 hover:text-zinc-200 rounded-lg flex items-center justify-center text-center">
+          <ng-icon name="heroPauseSolid" size="24"></ng-icon>
+        </button>
+        <!-- <button (click)="stop()" class="w-10 min-w-10 h-10 text-zinc-500 hover:text-zinc-200 rounded-lg flex items-center justify-center text-center">
+          <ng-icon name="heroStopSolid" size="24"></ng-icon>
+        </button> -->
+      </div>
+
+      <div class="progress-control flex items-center gap-2 text-xs w-full">
+        <div class="text-xs text-zinc-500 w-10 text-center flex justify-center items-center">
+          {{ formatTime(currentTime) }}
+        </div>
+        <input type="range" [value]="currentTime" [max]="duration" (input)="seek($event)" />
+        <div class="text-xs text-zinc-500 w-10 text-center flex justify-center items-center">
+          {{ formatTime(duration) }}
+        </div>
+      </div>
+
+      <button (click)="repeat()" [class.isLoop]="isLoop()" class="w-10 min-w-10 h-10 text-zinc-500 hover:text-zinc-200 rounded-lg flex items-center justify-center text-center">
+        <div class="flex items-center justify-center text-center">
+          <ng-icon name="heroArrowPathRoundedSquareSolid" size="24"></ng-icon>
+        </div>
+      </button>
+    </div>
+
+    <div class="volume-control items-center flex gap-2 px-2 h-14 bg-zinc-950/90 rounded-xl border border-zinc-800/80">
+      <button (click)="mute()" [ngClass]="{'!text-zinc-200': volume === 0}" class="w-10 min-w-10 h-10 text-zinc-500 hover:text-zinc-200 rounded-lg flex items-center justify-center text-center">
+        <ng-icon name="heroSpeakerXMarkSolid" size="24"></ng-icon>
       </button>
       <input type="range" id="volume" [value]="volume" (input)="changeVolume($event)" min="0" max="1" step="0.01"/>
-      <button (click)="setMaxVol()" [ngClass]="{'!text-zinc-200': volume === 1}" class="w-8 min-w-8 h-8 text-zinc-500 hover:text-zinc-200 rounded-full flex items-center justify-center text-center">
-        <ng-icon name="heroSpeakerWaveSolid" size="20"></ng-icon>
+      <button (click)="setMaxVol()" [ngClass]="{'!text-zinc-200': volume === 1}" class="w-10 min-w-10 h-10 text-zinc-500 hover:text-zinc-200 rounded-lg flex items-center justify-center text-center">
+        <ng-icon name="heroSpeakerWaveSolid" size="24"></ng-icon>
       </button>
     </div>
   </div>
