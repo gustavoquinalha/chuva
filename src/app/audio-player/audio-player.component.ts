@@ -25,7 +25,7 @@ export class AudioPlayerComponent {
   private canvas!: HTMLCanvasElement;
   private ctx!: CanvasRenderingContext2D;
   private rainDrops: RainDrop[] = [];
-  private numDrops: number = 200;
+  private numDrops: number = 500;
   private animationFrameId: any;
 
   constructor(private elementRef: ElementRef, private ref: ChangeDetectorRef) { }
