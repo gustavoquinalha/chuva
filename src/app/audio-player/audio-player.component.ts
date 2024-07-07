@@ -20,6 +20,7 @@ export class AudioPlayerComponent {
   volume: number = 1
   isPlaying = signal(false);
   isLoop = signal(true);
+  mp3Url: string = 'chuva.mp3';
 
   private canvas!: HTMLCanvasElement;
   private ctx!: CanvasRenderingContext2D;
