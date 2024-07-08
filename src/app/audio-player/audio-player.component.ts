@@ -1,23 +1,24 @@
-import { Component, ViewChild, ElementRef, signal, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, ViewChild, ElementRef, signal, HostListener } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroPlaySolid, heroPauseSolid, heroStopSolid, heroSpeakerXMarkSolid, heroSpeakerWaveSolid, heroArrowPathRoundedSquareSolid } from '@ng-icons/heroicons/solid';
-import { NgClass, NgIf } from '@angular/common';
+import { heroPlaySolid, heroPauseSolid, heroStopSolid, heroSpeakerXMarkSolid, heroSpeakerWaveSolid, heroArrowPathRoundedSquareSolid, heroArrowTopRightOnSquareSolid } from '@ng-icons/heroicons/solid';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { RainCanvasComponent } from '../rain-canvas/rain-canvas.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-audio-player',
   standalone: true,
-  imports: [NgIf, NgIconComponent, RainCanvasComponent, NgClass],
+  imports: [NgIf, NgIconComponent, RainCanvasComponent, NgClass, NgFor, FormsModule],
   templateUrl: './audio-player.component.html',
   styleUrl: './audio-player.component.scss',
-  viewProviders: [provideIcons({ heroPlaySolid, heroPauseSolid, heroStopSolid, heroSpeakerXMarkSolid, heroSpeakerWaveSolid, heroArrowPathRoundedSquareSolid })]
+  viewProviders: [provideIcons({ heroPlaySolid, heroPauseSolid, heroStopSolid, heroSpeakerXMarkSolid, heroSpeakerWaveSolid, heroArrowPathRoundedSquareSolid, heroArrowTopRightOnSquareSolid })]
 })
 
 export class AudioPlayerComponent {
   @ViewChild('audio') audioRef!: ElementRef<HTMLAudioElement>;
   duration: number = 0;
   currentTime: number = 0;
-  volume: number = 1
+  volume: number = 1;
   isPlaying = signal(false);
   isLoop = signal(true);
   mp3Url: string = 'https://lazy-days.netlify.app/assets/chuva.mp3';
@@ -28,6 +29,17 @@ export class AudioPlayerComponent {
   private rainDrops: RainDrop[] = [];
   private numDrops: number = 500;
   private animationFrameId: any;
+
+  select = [{
+    name: "Rain",
+    mp3: "https://lazy-days.netlify.app/assets/chuva.mp3",
+  }, {
+    name: "Ocean",
+    mp3: "https://lazy-days.netlify.app/assets/mar.mp3",
+  }, {
+    name: "Fireplace",
+    mp3: "https://lazy-days.netlify.app/assets/lareira.mp3",
+  }]
 
   constructor(private elementRef: ElementRef) { }
 
@@ -71,11 +83,6 @@ export class AudioPlayerComponent {
       this.isPlaying.set(false);
       cancelAnimationFrame(this.animationFrameId);
     };
-
-    // this.audioRef.nativeElement.onvolumechange = (value) => {
-    //   console.log("value", value);
-    //   value.target.volume
-    // };
   }
 
   play() {
@@ -140,8 +147,8 @@ export class AudioPlayerComponent {
     for (let i = 0; i < this.numDrops; i++) {
       const x = Math.random() * this.canvas.width;
       const y = Math.random() * this.canvas.height;
-      const length = Math.random() * 20 + 10;
-      const speed = Math.random() * 2 + 2;
+      const length = Math.random() * 30;
+      const speed = Math.random() * 30;
       this.rainDrops.push(new RainDrop(x, y, length, speed));
     }
   }
@@ -155,6 +162,13 @@ export class AudioPlayerComponent {
     if (this.isPlaying()) {
       this.animationFrameId = requestAnimationFrame(() => this.animate());
     }
+  }
+
+  changeSelect() {
+    console.log('changeSelect', this.mp3Url);
+    this.audioRef.nativeElement.src = this.mp3Url;
+    this.audioRef.nativeElement.load();
+    this.play();
   }
 }
 
@@ -178,8 +192,8 @@ class RainDrop {
     ctx.beginPath();
     ctx.moveTo(this.x, this.y);
     ctx.lineTo(this.x, this.y + this.length);
-    ctx.strokeStyle = 'rgba(174, 194, 224, 0.5)';
-    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgba(228, 228, 231, 0.5)';
+    ctx.lineWidth = 3;
     ctx.lineCap = 'round';
     ctx.stroke();
   }
