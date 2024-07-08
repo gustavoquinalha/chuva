@@ -1,4 +1,6 @@
-# Chuva
+# Lazy days
+
+[lazy-days.netlify.app](https://lazy-days.netlify.app/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
 
