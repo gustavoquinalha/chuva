@@ -10,5 +10,5 @@ import { AudioPlayerComponent } from "./audio-player/audio-player.component";
     imports: [RouterOutlet, AudioPlayerComponent]
 })
 export class AppComponent {
-  title = 'chuva';
+  title = 'Lazy Days';
 }
