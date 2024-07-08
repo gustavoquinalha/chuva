@@ -2,13 +2,12 @@ import { Component, ViewChild, ElementRef, signal, HostListener } from '@angular
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroPlaySolid, heroPauseSolid, heroStopSolid, heroSpeakerXMarkSolid, heroSpeakerWaveSolid, heroArrowPathRoundedSquareSolid, heroArrowTopRightOnSquareSolid } from '@ng-icons/heroicons/solid';
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { RainCanvasComponent } from '../rain-canvas/rain-canvas.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-audio-player',
   standalone: true,
-  imports: [NgIf, NgIconComponent, RainCanvasComponent, NgClass, NgFor, FormsModule],
+  imports: [NgIf, NgIconComponent, NgClass, NgFor, FormsModule],
   templateUrl: './audio-player.component.html',
   styleUrl: './audio-player.component.scss',
   viewProviders: [provideIcons({ heroPlaySolid, heroPauseSolid, heroStopSolid, heroSpeakerXMarkSolid, heroSpeakerWaveSolid, heroArrowPathRoundedSquareSolid, heroArrowTopRightOnSquareSolid })]
@@ -29,6 +28,7 @@ export class AudioPlayerComponent {
   private rainDrops: RainDrop[] = [];
   private numDrops: number = 500;
   private animationFrameId: any;
+  isSmallScreen?: boolean;
 
   select = [{
     name: "Rain",
@@ -41,7 +41,9 @@ export class AudioPlayerComponent {
     mp3: "https://lazy-days.netlify.app/assets/lareira.mp3",
   }]
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef) {
+    this.checkScreenSize();
+  }
 
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent): void {
@@ -55,6 +57,8 @@ export class AudioPlayerComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
     this.resizeCanvas();
+    this.checkScreenSize();
+
   }
 
   ngOnInit(): void {
@@ -132,23 +136,29 @@ export class AudioPlayerComponent {
     this.isLoop.set(this.audioRef.nativeElement.loop);
   }
 
-  onPlayPauseChange(isPlaying: boolean): void {
-    console.log('onPlayPauseChange', isPlaying);
-
-    this.isPlaying.set(isPlaying);
-  }
-
   private resizeCanvas(): void {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
   }
 
   private createRain(): void {
+    if (this.isSmallScreen) {
+      this.numDrops = 100;
+    } else {
+      this.numDrops = 500;
+    }
+
     for (let i = 0; i < this.numDrops; i++) {
       const x = Math.random() * this.canvas.width;
       const y = Math.random() * this.canvas.height;
-      const length = Math.random() * 30;
-      const speed = Math.random() * 30;
+
+      let valueTest = 30;
+      if (this.isSmallScreen) {
+        valueTest = 10;
+      }
+
+      const length = Math.random() * valueTest;
+      const speed = Math.random() * valueTest;
       this.rainDrops.push(new RainDrop(x, y, length, speed));
     }
   }
@@ -165,10 +175,13 @@ export class AudioPlayerComponent {
   }
 
   changeSelect() {
-    console.log('changeSelect', this.mp3Url);
     this.audioRef.nativeElement.src = this.mp3Url;
     this.audioRef.nativeElement.load();
     this.play();
+  }
+
+  checkScreenSize() {
+    this.isSmallScreen = window.innerWidth < 640;
   }
 }
 
