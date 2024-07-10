@@ -33,12 +33,27 @@ export class AudioPlayerComponent {
   select = [{
     name: "Rain",
     mp3: "https://lazy-days.netlify.app/assets/chuva.mp3",
+  },{
+    name: "Light Rain",
+    mp3: "https://lazy-days.netlify.app/assets/chuva-fraca.mp3",
   }, {
     name: "Ocean",
     mp3: "https://lazy-days.netlify.app/assets/mar.mp3",
   }, {
+    name: "Ocean 2",
+    mp3: "https://lazy-days.netlify.app/assets/ondas.mp3",
+  }, {
     name: "Fireplace",
     mp3: "https://lazy-days.netlify.app/assets/lareira.mp3",
+  }, {
+    name: "White Noise 1",
+    mp3: "https://lazy-days.netlify.app/assets/noise1.mp3",
+  }, {
+    name: "White Noise 2",
+    mp3: "https://lazy-days.netlify.app/assets/noise2.mp3",
+  }, {
+    name: "White Noise 3",
+    mp3: "https://lazy-days.netlify.app/assets/noise3.mp3",
   }]
 
   constructor(private elementRef: ElementRef) {
