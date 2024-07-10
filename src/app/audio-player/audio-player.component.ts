@@ -20,7 +20,7 @@ export class AudioPlayerComponent {
   volume: number = 1;
   isPlaying = signal(false);
   isLoop = signal(true);
-  mp3Url: string = 'https://lazy-days.netlify.app/assets/chuva.mp3';
+  mp3Url: string = 'https://lazy-days.netlify.app/assets/rain/1.mp3';
   showElement = signal(true);
   private timeoutId: any;
   private canvas!: HTMLCanvasElement;
@@ -30,31 +30,100 @@ export class AudioPlayerComponent {
   private animationFrameId: any;
   isSmallScreen?: boolean;
 
-  select = [{
-    name: "Rain",
-    mp3: "https://lazy-days.netlify.app/assets/chuva.mp3",
-  },{
-    name: "Light Rain",
-    mp3: "https://lazy-days.netlify.app/assets/chuva-fraca.mp3",
-  }, {
-    name: "Ocean",
-    mp3: "https://lazy-days.netlify.app/assets/mar.mp3",
-  }, {
-    name: "Ocean 2",
-    mp3: "https://lazy-days.netlify.app/assets/ondas.mp3",
-  }, {
-    name: "Fireplace",
-    mp3: "https://lazy-days.netlify.app/assets/lareira.mp3",
-  }, {
-    name: "White Noise 1",
-    mp3: "https://lazy-days.netlify.app/assets/noise1.mp3",
-  }, {
-    name: "White Noise 2",
-    mp3: "https://lazy-days.netlify.app/assets/noise2.mp3",
-  }, {
-    name: "White Noise 3",
-    mp3: "https://lazy-days.netlify.app/assets/noise3.mp3",
-  }]
+  select = [
+    {
+      name: "Rain 1",
+      mp3: "https://lazy-days.netlify.app/assets/rain/1.mp3",
+    },
+    {
+      name: "Rain 2",
+      mp3: "https://lazy-days.netlify.app/assets/rain/2.mp3",
+    },
+    {
+      name: "Rain 3",
+      mp3: "https://lazy-days.netlify.app/assets/rain/3.mp3",
+    },
+    {
+      name: "Rain 4",
+      mp3: "https://lazy-days.netlify.app/assets/rain/4.mp3",
+    },
+    {
+      name: "Rain 5",
+      mp3: "https://lazy-days.netlify.app/assets/rain/5.mp3",
+    },
+    {
+      name: "Rain 6",
+      mp3: "https://lazy-days.netlify.app/assets/rain/6.mp3",
+    },
+    {
+      name: "Rain 7",
+      mp3: "https://lazy-days.netlify.app/assets/rain/7.mp3",
+    },
+    {
+      name: "Ocean 1",
+      mp3: "https://lazy-days.netlify.app/assets/ocean/1.mp3",
+    },
+    {
+      name: "Ocean 2",
+      mp3: "https://lazy-days.netlify.app/assets/ocean/2.mp3",
+    },
+    {
+      name: "Ocean 3",
+      mp3: "https://lazy-days.netlify.app/assets/ocean/3.mp3",
+    },
+    {
+      name: "Ocean 4",
+      mp3: "https://lazy-days.netlify.app/assets/ocean/4.mp3",
+    },
+    {
+      name: "Ocean 5",
+      mp3: "https://lazy-days.netlify.app/assets/ocean/5.mp3",
+    },
+    {
+      name: "Ocean 6",
+      mp3: "https://lazy-days.netlify.app/assets/ocean/6.mp3",
+    },
+    {
+      name: "Ocean 7",
+      mp3: "https://lazy-days.netlify.app/assets/ocean/7.mp3",
+    },
+    {
+      name: "White noise 1",
+      mp3: "https://lazy-days.netlify.app/assets/pure/1.mp3",
+    },
+    {
+      name: "White noise 2",
+      mp3: "https://lazy-days.netlify.app/assets/pure/2.mp3",
+    },
+    {
+      name: "White noise 3",
+      mp3: "https://lazy-days.netlify.app/assets/pure/3.mp3",
+    },
+    {
+      name: "White noise 4",
+      mp3: "https://lazy-days.netlify.app/assets/pure/4.mp3",
+    },
+    {
+      name: "White noise 5",
+      mp3: "https://lazy-days.netlify.app/assets/pure/5.mp3",
+    },
+    {
+      name: "Shower",
+      mp3: "https://lazy-days.netlify.app/assets/shower/1.mp3",
+    },
+    {
+      name: "Waterfall",
+      mp3: "https://lazy-days.netlify.app/assets/waterfall/1.mp3",
+    },
+    {
+      name: "Waves 1",
+      mp3: "https://lazy-days.netlify.app/assets/waves/1.mp3",
+    },
+    {
+      name: "Waves 2",
+      mp3: "https://lazy-days.netlify.app/assets/waves/2.mp3",
+    },
+  ]
 
   constructor(private elementRef: ElementRef) {
     this.checkScreenSize();
