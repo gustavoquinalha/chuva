@@ -84,10 +84,6 @@ export class AudioPlayerComponent {
       mp3: "https://lazy-days.netlify.app/assets/ocean/6.mp3",
     },
     {
-      name: "Ocean 7",
-      mp3: "https://lazy-days.netlify.app/assets/ocean/7.mp3",
-    },
-    {
       name: "White noise 1",
       mp3: "https://lazy-days.netlify.app/assets/pure/1.mp3",
     },
